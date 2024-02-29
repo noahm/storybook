@@ -1,6 +1,5 @@
-import type { ViewMode as ViewModeBase } from '@storybook/csf';
-
-import type { Addon_OptionsParameter } from './addons';
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { ViewMode as ViewModeBase, StoryId, Parameters } from '@storybook/csf';
 
 export type {
   AnnotatedStoryFn,
@@ -59,6 +58,29 @@ export type {
   StrictInputType,
   Tag,
 } from '@storybook/csf';
+
+// The `any` here is the story store's `StoreItem` record. Ideally we should probably only
+// pass a defined subset of that full data, but we pass it all so far :shrug:
+export type IndexEntryLegacy = [StoryId, any, Parameters, Parameters];
+export type Addon_Comparator<T> = ((a: T, b: T) => boolean) | ((a: T, b: T) => number);
+export type Addon_StorySortComparator = Addon_Comparator<IndexEntryLegacy>;
+export type Addon_StorySortParameter = Addon_StorySortComparator | Addon_StorySortObjectParameter;
+export type Addon_StorySortMethod = 'configure' | 'alphabetical';
+export interface Addon_StorySortObjectParameter {
+  method?: Addon_StorySortMethod;
+  order?: any[];
+  locales?: string;
+  includeNames?: boolean;
+}
+
+export interface Addon_OptionsParameter extends Object {
+  storySort?: Addon_StorySortParameter;
+  theme?: {
+    base: string;
+    brandTitle?: string;
+  };
+  [key: string]: any;
+}
 
 type OrString<T extends string> = T | (string & {});
 

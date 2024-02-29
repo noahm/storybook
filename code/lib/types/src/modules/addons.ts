@@ -5,6 +5,8 @@ import type { RenderData as RouterData } from '../../../router/src/types';
 import type { ThemeVars } from '../../../theming/src/types';
 import type { API_SidebarOptions } from './api';
 import type {
+  Addon_Comparator,
+  Addon_StorySortObjectParameter,
   Args,
   ArgsStoryFn as ArgsStoryFnForFramework,
   DecoratorFunction as DecoratorFunctionForFramework,
@@ -40,35 +42,10 @@ export type Addons_ArgTypes<TArgs = Args> = {
   [key in string]: Addon_ArgType<unknown>;
 };
 
-export type Addon_Comparator<T> = ((a: T, b: T) => boolean) | ((a: T, b: T) => number);
-export type Addon_StorySortMethod = 'configure' | 'alphabetical';
-export interface Addon_StorySortObjectParameter {
-  method?: Addon_StorySortMethod;
-  order?: any[];
-  locales?: string;
-  includeNames?: boolean;
-}
-
-// The `any` here is the story store's `StoreItem` record. Ideally we should probably only
-// pass a defined subset of that full data, but we pass it all so far :shrug:
-export type IndexEntryLegacy = [StoryId, any, Parameters, Parameters];
-export type Addon_StorySortComparator = Addon_Comparator<IndexEntryLegacy>;
-export type Addon_StorySortParameter = Addon_StorySortComparator | Addon_StorySortObjectParameter;
 export type Addon_StorySortComparatorV7 = Addon_Comparator<IndexEntry>;
 export type Addon_StorySortParameterV7 =
   | Addon_StorySortComparatorV7
   | Addon_StorySortObjectParameter;
-
-// TODO: remove all these types, they belong in the renderer and csf-package
-
-export interface Addon_OptionsParameter extends Object {
-  storySort?: Addon_StorySortParameter;
-  theme?: {
-    base: string;
-    brandTitle?: string;
-  };
-  [key: string]: any;
-}
 
 export interface Addon_OptionsParameterV7 extends Object {
   storySort?: Addon_StorySortParameterV7;

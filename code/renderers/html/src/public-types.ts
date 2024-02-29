@@ -8,10 +8,10 @@ import type {
   StoryContext as GenericStoryContext,
   StrictArgs,
   ProjectAnnotations,
-} from '@storybook/types';
+} from '@storybook/types/renderer';
 import type { HtmlRenderer } from './types';
 
-export type { Args, ArgTypes, Parameters, StrictArgs } from '@storybook/types';
+export type { Args, ArgTypes, Parameters, StrictArgs } from '@storybook/types/renderer';
 export type { HtmlRenderer };
 
 /**

@@ -27,6 +27,9 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
+    "./renderer": {
+      "types": "./dist/renderer.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "main": "dist/index.js",
@@ -60,7 +63,8 @@
   "bundler": {
     "pre": "./scripts/generate-available-frameworks.js",
     "entries": [
-      "./src/index.ts"
+      "./src/index.ts",
+      "./src/renderer.ts"
     ]
   },
   "gitHead": "e6a7fd8a655c69780bc20b9749c2699e44beae17"
